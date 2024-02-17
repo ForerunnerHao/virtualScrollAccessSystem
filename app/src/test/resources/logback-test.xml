@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Define the FileAppender -->
+    <appender name="HIKARI_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>hikari.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="MYBATIS_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>mybatis.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Set the log level for HikariCP and use the FileAppender -->
+    <logger name="com.zaxxer.hikari" level="ERROR">
+        <appender-ref ref="HIKARI_FILE" />
+    </logger>
+
+    <!-- MyBatis logging configuration -->
+    <logger name="org.apache.ibatis" level="ERROR">
+        <appender-ref ref="MYBATIS_FILE" />
+    </logger>
+
+    <logger name="java.sql" level="ERROR">
+        <appender-ref ref="MYBATIS_FILE" />
+    </logger>
+
+    <!-- Root logger configuration -->
+    <root level="info">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

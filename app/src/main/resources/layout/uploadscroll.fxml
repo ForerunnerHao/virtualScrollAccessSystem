@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="uploadScroll_AnchorPane_ROOT" prefHeight="650.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="223.0" layoutY="434.0" text="Max size is 15 MB " />
+      <GridPane alignment="CENTER" cache="true" layoutX="100.0" layoutY="100.0" prefHeight="334.0" prefWidth="480.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="361.0" minWidth="10.0" prefWidth="361.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Name" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Size" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll" GridPane.rowIndex="4" />
+            <TextField fx:id="uploadScroll_textField_scrollName" prefWidth="226.0" GridPane.columnIndex="1" />
+            <TextArea fx:id="uploadScroll_textArea_description" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <Button fx:id="uploadScroll_Button_selectFile" mnemonicParsing="false" onAction="#onSelectFile" style="-fx-background-color: white; -fx-border-color: white;" text="Select Scroll" textFill="#0077ff" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="File Name" GridPane.rowIndex="2" />
+            <Label fx:id="uploadScroll_label_fileName" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="uploadScroll_textField_fileSize" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Button fx:id="uploadScroll_button_upload" layoutX="282.0" layoutY="511.0" mnemonicParsing="false" onAction="#onUploadAction" prefHeight="32.0" prefWidth="146.0" text="Upload">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="uploadScroll_AnchorPane_dialogRoot" prefHeight="200.0" prefWidth="200.0" visible="false">
+         <children>
+            <Pane fx:id="uploadScroll_Pane_overlay" prefHeight="644.0" prefWidth="643.0" style="-fx-background-color: rgba(0,0,0,0.5);" />
+            <AnchorPane fx:id="uploadScroll_AnchorPane_uploadDialog" layoutX="200.0" layoutY="250.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: white;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <Label fx:id="uploadScroll_label_uploadText" layoutX="34.0" layoutY="14.0" text="Uploading..." />
+                  <ProgressBar fx:id="uploadScroll_ProgressBar_upload" layoutX="34.0" layoutY="41.0" prefHeight="18.0" prefWidth="249.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Label layoutX="25.0" layoutY="40.0" text="Upload Your Scroll">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

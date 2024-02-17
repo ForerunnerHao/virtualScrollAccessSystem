@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : name -->
+<mapper namespace="UserDownloadMapper">
+    <select id="selectAll" resultType="vsas.pojo.UserDownload">
+        SELECT * FROM user_download;
+    </select>
+
+
+    <select id="selectById" resultType="vsas.pojo.UserDownload">
+        SELECT * FROM user_download WHERE download_id = #{download_id};
+    </select>
+
+    <select id="selectDownloadDetailsByDownloaderId" resultType="vsas.pojo.UserDownload">
+        SELECT
+        ud.download_id,
+        ud.scroll_id,
+        ud.downloader_id,
+        ds.scroll_name,
+        ds.file_name,
+        ud.download_time,
+        ds.file_size,
+        us.username as uploader_name,
+        ds.uploader_id
+
+        FROM user_download ud
+        JOIN digital_scroll ds ON ud.scroll_id = ds.scroll_id
+        JOIN user us ON us.user_id = ds.uploader_id
+
+        WHERE ud.downloader_id =  #{downloaderId};
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM user_download WHERE download_id = #{download_id};
+    </delete>
+
+    <delete id="deleteMultipleByIds">
+        DELETE FROM user_download WHERE scroll_id
+        in
+        <foreach collection="list" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="insertScroll" parameterType="vsas.pojo.UserDownload">
+        INSERT INTO user_download(downloader_id, scroll_id)
+        VALUES (#{downloaderId},#{scrollId});
+    </insert>
+
+</mapper>

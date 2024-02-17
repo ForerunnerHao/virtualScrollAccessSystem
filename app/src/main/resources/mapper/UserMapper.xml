@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : name -->
+<mapper namespace="UserMapper">
+    <select id="selectAll" parameterType="int" resultType="vsas.pojo.User">
+        select * from user where user_id != #{id};
+    </select>
+
+    <!-- Select a user by ID -->
+    <select id="selectById" parameterType="int" resultType="vsas.pojo.User">
+        select * from user where user_id = #{admin_user_id};
+    </select>
+
+
+    <!-- Select a user by name -->
+    <select id="selectByUsername" parameterType="string" resultType="vsas.pojo.User">
+        select * from user where username = #{username};
+    </select>
+
+    <!-- Delete a user by ID-->
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM user WHERE user_id = #{id};
+    </delete>
+
+    <!-- Insert a new user-->
+    <insert id="insertUser" parameterType="vsas.pojo.User">
+        INSERT INTO user (username, password, user_type, fullname, phone_number, email)
+        VALUES (#{username}, #{password}, #{user_type}, #{fullname}, #{phone_number}, #{email});
+    </insert>
+
+    <!-- Check if the user exists -->
+    <select id="userExists" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM user WHERE username = #{username};
+    </select>
+
+    <!-- Update a user by ID -->
+    <update id="updateById" parameterType="vsas.pojo.User">
+        UPDATE user
+        SET
+        password = #{password},
+        user_type = #{user_type},
+        fullname = #{fullname},
+        phone_number = #{phone_number},
+        email = #{email}
+        WHERE user_id = #{user_id};
+    </update>
+
+    <update id="updateUserInfo" parameterType="vsas.pojo.User">
+        UPDATE user
+        SET
+        fullname = #{fullname},
+        phone_number = #{phone_number},
+        email = #{email},
+        WHERE user_id = #{user_id};
+    </update>
+
+    <!-- login user -->
+    <select id="userLogin" parameterType="string" resultType="vsas.pojo.User">
+        SELECT user_id, user_type, username, password FROM user WHERE username = #{username};
+    </select>
+
+    <!--  is Admin  -->
+    <select id="isAdmin" resultType="int">
+        SELECT COUNT(*) FROM user WHERE user_type = "admin" AND user_id = #{user_id};
+    </select>
+
+
+</mapper>

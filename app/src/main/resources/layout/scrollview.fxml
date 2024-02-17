@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="scrollview_text_title" layoutX="24.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Lists" wrappingWidth="147.0234375">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <TableView fx:id="scrollview_tableview_scrollList" layoutX="18.0" layoutY="113.0" onMouseClicked="#onClickOneRowAction" prefHeight="457.0" prefWidth="594.0">
+        <columns>
+          <TableColumn fx:id="scrollview_tableitem_id" prefWidth="70.0" text="Scroll ID" />
+            <TableColumn fx:id="scrollview_tableitem_name" prefWidth="89.0" text="Scroll Name" />
+            <TableColumn fx:id="scrollview_tableitem_uploaderName" prefWidth="119.0" text="Uploader Name" />
+            <TableColumn fx:id="scrollview_tableitem_createTime" prefWidth="130.0" text="Create Time" />
+            <TableColumn fx:id="scrollview_tableitem_downloadTimes" prefWidth="174.0" text="Download Times" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+
+      <TextField fx:id="scrollview_textfield_searchBox" layoutX="159.0" layoutY="53.0" prefHeight="33.0" prefWidth="254.0" />
+      <ComboBox fx:id="scrollview_combobox_search" layoutX="413.0" layoutY="53.0" prefHeight="33.0" prefWidth="108.0">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="ScrollName" />
+                  <String fx:value="ScrollID" />
+                  <String fx:value="UploaderName" />
+                  <String fx:value="UploaderID" />
+                  <String fx:value="CreateTime"/>
+                  <String fx:value="All" />
+              </FXCollections>
+          </items>
+      </ComboBox>
+      <Button fx:id="scrollview_button_search" layoutX="539.0" layoutY="53.0" mnemonicParsing="false" onAction="#onScrollSearchAction" prefHeight="33.0" prefWidth="73.0" text="Search" />
+      <Label fx:id="scrollview_label_searchResult" layoutX="18.0" layoutY="98.0" prefHeight="15.0" prefWidth="97.0" text="Total null results" />
+      <ProgressBar fx:id="scrollview_progressbar_loadData" layoutX="150.0" layoutY="300.0" prefHeight="24.0" prefWidth="318.0" visible="false" />
+      <Label fx:id="scrollview_label_loadData" layoutX="250.0" layoutY="320.0" text="Data loading ..." visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="scrollview_button_refresh" layoutX="20.0" layoutY="578.0" mnemonicParsing="false" onAction="#onRefreshAction" text="Refresh" />
+      <AnchorPane fx:id="scrollview_anchorpane_dialogPaneRoot" visible="false">
+         <children>
+            <Pane fx:id="scrollview_pane_overlay" onMouseClicked="#onDialogOverlayAction" prefHeight="650.0" prefWidth="650.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+            <DialogPane fx:id="scrollview_dialogpane_scrollDetail" expanded="true" layoutX="50.0" layoutY="50.0">
+               <content>
+                  <AnchorPane fx:id="scrollview_pane_dialogMain" layoutX="100.0" prefHeight="473.0" prefWidth="500.0">
+                     <children>
+                        <GridPane fx:id="scrollview_grippane_mainTable" layoutX="50.0" layoutY="6.0" prefHeight="323.0" prefWidth="418.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="153.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="265.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Text fx:id="scrollview_text_dialogID" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll ID" />
+                              <Text fx:id="scrollview_text_dialogName" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Name" GridPane.rowIndex="1" />
+                              <Text fx:id="scrollview_text_dialogUploader" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Uploader ID " GridPane.rowIndex="3" />
+                              <Text fx:id="scrollview_text_dialogCreateTime" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Time" GridPane.rowIndex="5" />
+                              <Text fx:id="scrollview_text_dialogUpdateTime" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Update Time" GridPane.rowIndex="6" />
+                              <Text fx:id="scrollview_text_dialogUploadTimes" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload Times" GridPane.rowIndex="7" />
+                              <Text fx:id="scrollview_text_dialogDownloadTimes" strokeType="OUTSIDE" strokeWidth="0.0" text="Download Times" GridPane.rowIndex="8" />
+                              <Text fx:id="scrollview_text_dialogFileSize" strokeType="OUTSIDE" strokeWidth="0.0" text="File Size" GridPane.rowIndex="9" />
+                              <Text fx:id="scrollview_text_dialogUploader1" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Uploader Name" GridPane.rowIndex="4" />
+                              <Text fx:id="scrollview_text_dialogName1" strokeType="OUTSIDE" strokeWidth="0.0" text="File Name" GridPane.rowIndex="2" />
+                              <Label fx:id="scrollview_textField_dialogID" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" />
+                              <Label fx:id="scrollview_textField_dialogName" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="scrollview_textField_dialogFileName" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="scrollview_textField_dialogUploader" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="scrollview_textField_dialogUploaderName" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="scrollview_textField_dialogCreateTime" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="scrollview_textField_dialogUpdateTime" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="scrollview_textField_dialogUploadTimes" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label fx:id="scrollview_textField_dialogDownloadTimes" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Label fx:id="scrollview_textField_dialogFileSize" prefHeight="15.0" prefWidth="225.0" text="Null" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                           </children>
+                        </GridPane>
+                        <Button fx:id="scrollview_button_dialogDelete" layoutX="186.0" layoutY="436.0" mnemonicParsing="false" onAction="#onDialogDeleteAction" text="Delete" visible="false" />
+                        <Button fx:id="scrollview_button_dialogDownload" layoutX="273.0" layoutY="436.0" mnemonicParsing="false" onAction="#onDialogDownloadAction" text="Download" />
+                        <Button fx:id="scrollview_button_dialogCancel" layoutX="373.0" layoutY="436.0" mnemonicParsing="false" onAction="#onDialogCancelAction" text="Back" />
+                         <TextArea fx:id="scrollview_textField_dialogDescription" disable="true" layoutX="203.0" layoutY="333.0" prefHeight="84.0" prefWidth="265.0" wrapText="true" />
+                        <Text fx:id="scrollview_text_dialogDescription" layoutX="50.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Descrption" />
+                        <Button fx:id="scrollview_button_dialogSave" layoutX="113.0" layoutY="436.0" mnemonicParsing="false" onAction="#onDialogSaveAction" text="Save" visible="false" />
+                        <Button fx:id="scrollview_button_preview" layoutX="198.0" layoutY="436.0" mnemonicParsing="false" onAction="#onPreviewAction" text="Preview" />
+                     </children>
+                  </AnchorPane>
+               </content>
+               <header>
+                  <Label alignment="TOP_LEFT" text="Scroll Detail">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" top="5.0" />
+                     </padding>
+                  </Label>
+               </header>
+            </DialogPane>
+            <AnchorPane fx:id="scrollview_anchorpane_downloadPane" layoutX="100.0" layoutY="250.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Label fx:id="scrollview_label_downloadLabel" layoutX="53.0" layoutY="30.0" text="Please wating...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="scrollview_progressBar_downloadProgress" layoutX="53.0" layoutY="50.0" prefHeight="18.0" prefWidth="281.0" style="-fx-background-color: white;" />
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="preview_anchorpane_dialogpaneroot" layoutX="32.0" layoutY="26.0" prefHeight="531.0" prefWidth="450.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Pane fx:id="preview_pane_overlay" layoutX="6.0" layoutY="-7.0" prefHeight="650.0" prefWidth="561.0" />
+            <DialogPane fx:id="preview_dialogpane_scrollID" layoutX="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="534.0">
+                <header>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="56.0" prefWidth="561.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preview" wrappingWidth="132.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                </header>
+                <content>
+                  <AnchorPane fx:id="preview_pane_dialogmain" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0">
+                     <children>
+                        <TextArea fx:id="prewview_textarea_showtext" editable="false" layoutX="14.0" layoutY="1.0" prefHeight="527.0" prefWidth="436.0" wrapText="true" />
+                        <Button fx:id="prevew_button_dialogsave" layoutX="484.0" layoutY="73.0" mnemonicParsing="false" onAction="#OnDialogPreviewSave" text="Save" visible="false" />
+                        <Button fx:id="preview_button_dialogback" layoutX="484.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnDialogPreviewBack" text="Back" />
+                     </children>
+                  </AnchorPane>
+                </content>
+                <expandableContent>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+                </expandableContent>
+            </DialogPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

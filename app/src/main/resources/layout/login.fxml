@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane fx:id="LogInPane" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="480.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <!--
+      fx:controller="vsas.controller.LoginController"
+      using loader.setController() method to set fxml loader controller,
+      no need specify controller on here; Do not care the error with 'onAction' in IDE;
+   -->
+   <children>
+      <ImageView fx:id="login_img_logo" fitHeight="132.0" fitWidth="149.0" layoutX="256.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../img/logo@2x.png" />
+      </ImageView>
+      <ImageView fx:id="login_img_logoName" fitHeight="30.0" fitWidth="121.0" layoutX="270.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../img/new_logo_name@2x.png" />
+      </ImageView>
+      <Text fx:id="login_text_username" layoutX="192.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Text fx:id="login_text_password" layoutX="192.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+      <TextField fx:id="login_textField_username" layoutX="265.0" layoutY="225.0" onMouseClicked="#onUsernameClickAction" />
+      <PasswordField fx:id="login_passwordField_password" layoutX="264.0" layoutY="273.0" onMouseClicked="#onPasswordClickAction" />
+      <Button fx:id="login_button_login" contentDisplay="CENTER" layoutX="340.0" layoutY="326.0" mnemonicParsing="false" onAction="#onLoginAction" prefHeight="29.0" prefWidth="85.0" text="Login" />
+      <Button fx:id="login_button_signup" layoutX="204.0" layoutY="326.0" mnemonicParsing="false" onAction="#onSignUpAction" prefHeight="29.0" prefWidth="85.0" text="Sign Up" />
+      <Text fx:id="login_text_guestAccess" fill="#0070ff" layoutX="418.0" layoutY="431.0" onMouseClicked="#onGuestAccessAction" strokeType="OUTSIDE" strokeWidth="0.0" text="Using guest account access VSAS" underline="true" />
+      <Label fx:id="login_label_status" layoutX="238.0" layoutY="384.0" text="Please wait system connecting... " />
+      <ProgressIndicator fx:id="login_progress_indicator" layoutX="204.0" layoutY="380.0" prefHeight="23.0" prefWidth="30.0" />
+      <FontIcon fx:id="login_fontIcon_success" fill="#009a33" iconColor="#67c23a" iconLiteral="anto-check-circle" iconSize="24" layoutX="207.0" layoutY="402.0" />
+      <FontIcon fx:id="login_fontIcon_fail" iconColor="#fe6c6c" iconLiteral="anto-close-circle" iconSize="24" layoutX="209.0" layoutY="402.0" />
+   </children>
+   <effect>
+      <Blend />
+   </effect>
+</AnchorPane>

@@ -1,0 +1,13 @@
+.text-field-error {
+    -fx-border-color: rgba(245, 108, 108, 0.6);
+    -fx-border-width: 2;
+}
+
+.text-field-success {
+    -fx-border-color: rgba(103, 194, 58, 0.6);
+    -fx-border-width: 2;
+}
+
+.userHome-borderPane-background {
+    -fx-background-color: rgba(233, 233, 233, 1);
+}

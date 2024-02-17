@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace : name -->
+<mapper namespace="DigitalScrollMapper">
+
+    <select id="selectAll" resultType="vsas.pojo.DigitalScroll">
+        SELECT
+        ds.scroll_id,
+        ds.scroll_name,
+        ds.file_name,
+        ds.scroll_description,
+        ds.uploader_id,
+        us.username as uploader_name,
+        ds.create_time,
+        ds.update_time,
+        ds.upload_times,
+        ds.download_times,
+        ds.file_size
+
+        FROM digital_scroll ds
+        JOIN user us ON us.user_id = ds.uploader_id;
+
+    </select>
+
+
+    <!-- Select a scroll by ID -->
+    <select id="selectById" parameterType="int" resultType="vsas.pojo.DigitalScroll">
+
+        select * from digital_scroll where scroll_id = #{id};
+    </select>
+    <!-- Select list of scrolls uploaded by a user-->
+    <select id = "selectUploadedScrollById" parameterType = "int" resultType ="vsas.pojo.DigitalScroll">
+
+        select * from digital_scroll where uploader_id = #{id};
+    </select>
+
+    <!-- Select a user by scroll_name -->
+    <select id="selectByName" parameterType="string" resultType="vsas.pojo.DigitalScroll">
+        select * from digital_scroll where scroll_name = #{scroll_name};
+    </select>
+
+    <!--  Returns the input stream of a BLOB by ID -->
+    <select id="selectBlobById" parameterType="int" resultType="java.io.InputStream">
+        select binary_file from digital_scroll where scroll_id = #{id};
+
+    </select>
+
+    <!--  increment Download Times by scroll_id -->
+    <update id="incrementDownloadTimes" parameterType="int">
+        UPDATE digital_scroll
+        SET download_times = download_times + 1
+        WHERE scroll_id = #{scroll_id}
+    </update>
+
+    <!--  Update binary file by scroll name  -->
+    <update id="updateBlob" parameterType="map">
+        UPDATE digital_scroll SET binary_file = #{data} WHERE scroll_name = #{scroll_name};
+    </update>
+
+    <!-- Delete a scroll by ID-->
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM digital_scroll WHERE scroll_id = #{id};
+    </delete>
+
+    <!-- Insert a new scroll-->
+    <insert id="insertScroll" parameterType="vsas.pojo.User">
+        INSERT INTO digital_scroll (scroll_name, file_name, scroll_description, binary_file, uploader_id, file_size)
+        VALUES (#{scroll_name}, #{file_name}, #{scroll_description}, #{binary_file}, #{uploader_id}, #{file_size});
+    </insert>
+
+    <!-- Check if the scroll exists -->
+    <select id="scrollExists" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM digital_scroll WHERE scroll_name = #{scroll_name};
+    </select>
+
+    <!-- Update a scroll by ID -->
+    <update id="updateWithScroll" parameterType="vsas.pojo.User">
+        UPDATE digital_scroll
+        SET
+        scroll_name = #{scroll_name},
+        scroll_description = #{scroll_description},
+        binary_file = #{binary_file},
+        upload_times = #{upload_times},
+        file_size = #{file_size},
+        file_name = #{file_name},
+        update_time = CURRENT_TIMESTAMP
+        WHERE scroll_id = #{scroll_id};
+    </update>
+
+    <update id="updateWithoutScroll" parameterType="vsas.pojo.User">
+        UPDATE digital_scroll
+        SET
+        scroll_name = #{scroll_name},
+        scroll_description = #{scroll_description},
+        update_time = CURRENT_TIMESTAMP
+        WHERE scroll_id = #{scroll_id};
+    </update>
+
+</mapper>

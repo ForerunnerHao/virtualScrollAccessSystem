@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="uploadView_text_title" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload History" wrappingWidth="201.0234375">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <TableView fx:id="uploadView_tableview_uploadHistory" layoutX="18.0" layoutY="113.0" onMouseClicked="#onClickOneRowAction" prefHeight="457.0" prefWidth="594.0">
+        <columns>
+          <TableColumn fx:id="uploadView_tableitem_id" prefWidth="69.0" text="Scroll id" />
+            <TableColumn fx:id="uploadView_tableitem_name" prefWidth="145.0" text="Scroll Name" />
+            <TableColumn fx:id="uploadView_tableitem_size" prefWidth="119.0" text="Scroll Size" />
+            <TableColumn fx:id="uploadView_tableitem_uploadTime" prefWidth="99.0" text="Update Time" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+
+      <TextField fx:id="uploadView_textfield_searchBox" layoutX="260.0" layoutY="53.0" prefHeight="33.0" prefWidth="260.0" promptText="Scroll Name：" />
+      <Button fx:id="uploadView_button_search" layoutX="539.0" layoutY="53.0" mnemonicParsing="false" onAction="#onuploadHistorySearchAction" prefHeight="33.0" prefWidth="73.0" text="Search" />
+      <Label fx:id="uploadView_label_totalSearchnum" layoutX="18.0" layoutY="98.0" prefHeight="15.0" prefWidth="97.0" text="Total null results" />
+      <ProgressBar fx:id="uploadView_progressbar_loadData" layoutX="150.0" layoutY="300.0" prefHeight="24.0" prefWidth="318.0" visible="false" />
+      <Label fx:id="uploadView_label_loadData" layoutX="250.0" layoutY="320.0" text="Data loading ..." visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="uploadView_button_refresh" layoutX="20.0" layoutY="578.0" mnemonicParsing="false" onAction="#onRefreshAction" text="Refresh" />
+      <AnchorPane fx:id="uploadView_anchorpane_dialogPaneRoot" visible="false">
+         <children>
+            <Pane fx:id="uploadview_pane_overlay" onMouseClicked="#onDialogOverlayAction" prefHeight="650.0" prefWidth="650.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" />
+            <DialogPane fx:id="uploadview_dialogpane_scrollDetail" expanded="true" layoutX="50.0" layoutY="50.0">
+               <content>
+                  <AnchorPane fx:id="uploadview_pane_dialogMain" layoutX="100.0" prefHeight="473.0" prefWidth="500.0">
+                     <children>
+                        <GridPane fx:id="uploadview_grippane_mainTable" layoutX="35.0" prefHeight="400.0" prefWidth="400.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Text fx:id="uploadview_text_dialogID" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll ID" />
+                              <Text fx:id="uploadview_text_dialogName" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Name" GridPane.rowIndex="1" />
+                              <Text fx:id="uploadview_text_dialogDescription" strokeType="OUTSIDE" strokeWidth="0.0" text="Scroll Descrption" GridPane.rowIndex="8" />
+                              <Text fx:id="uploadview_text_dialogCreateTime" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Time" GridPane.rowIndex="3" />
+                              <Text fx:id="uploadview_text_dialogUpdateTime" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Update Time" GridPane.rowIndex="4" />
+                              <Text fx:id="uploadview_text_dialogUploadTimes" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload Times" GridPane.rowIndex="5" />
+                              <Text fx:id="uploadview_text_dialogDownloadTimes" strokeType="OUTSIDE" strokeWidth="0.0" text="Download Times" GridPane.rowIndex="6" />
+                              <Text fx:id="uploadview_text_dialogFileSize" strokeType="OUTSIDE" strokeWidth="0.0" text="File Size" GridPane.rowIndex="7" />
+                              <TextField fx:id="uploadview_textField_dialogID" disable="true" GridPane.columnIndex="1" />
+                              <TextField fx:id="uploadview_textField_dialogName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="uploadview_textField_dialogCreateTime" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="uploadview_textField_dialogUpdateTime" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="uploadview_textField_dialogUploadTimes" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField fx:id="uploadview_textField_dialogDownloadTimes" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="uploadview_textField_dialogFileSize" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                               <TextArea fx:id="uploadview_textField_dialogDescription" prefHeight="200.0" prefWidth="208.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Text fx:id="uploadview_text_dialogFileName" strokeType="OUTSIDE" strokeWidth="0.0" text="File Nmae" GridPane.rowIndex="2" />
+                              <TextField fx:id="uploadview_textField_dialogFileName" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <Button fx:id="uploadview_button_dialogSave" layoutX="284.0" layoutY="430.0" mnemonicParsing="false" onAction="#onDialogSaveAction" text="Change" />
+                        <Button fx:id="uploadview_button_dialogCancel" layoutX="380.0" layoutY="430.0" mnemonicParsing="false" onAction="#onDialogCancelAction" text="Cancel" />
+                        <Button fx:id="uploadview_button_dialogSelect" layoutX="35.0" layoutY="430.0" mnemonicParsing="false" onAction="#onDialogSelectScrollAction" text="Select new scroll" />
+                        <Button fx:id="uploadview_button_dialogDelete" layoutX="205.0" layoutY="430.0" mnemonicParsing="false" onAction="#onDialogDeleteAction" text="Delete" />
+                     </children>
+                  </AnchorPane>
+               </content>
+               <header>
+                  <Label alignment="TOP_LEFT" text="Scroll Detail">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" top="5.0" />
+                     </padding>
+                  </Label>
+               </header>
+            </DialogPane>
+            <AnchorPane fx:id="uploadview_anchorpane_downloadPane" layoutX="100.0" layoutY="250.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Label fx:id="uploadview_label_downloadLabel" layoutX="53.0" layoutY="30.0" text="Downloading...">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="uploadview_progressBar_downloadProgress" layoutX="53.0" layoutY="50.0" prefHeight="18.0" prefWidth="281.0" progress="0.0" style="-fx-background-color: white;" />
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
